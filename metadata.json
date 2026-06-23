@@ -1,0 +1,8 @@
+{
+  "name": "Remix: RitemastaPro Publishing Platform",
+  "description": "Premium automated book formatting, presentation script compiler, outline compiler, and EPUB/PDF exporter platform.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
