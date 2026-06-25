@@ -253,7 +253,7 @@ function AppInner() {
   };
 
   return (
-    <div className={`${darkMode ? "bg-[#0F1117]" : "bg-[var(--bg-primary)]"} text-[var(--text-primary)] font-sans min-h-screen flex flex-col relative transition-colors duration-300`}>
+    <div className="font-sans min-h-screen flex flex-col relative" style={{background:"var(--brown-900)",color:"var(--text-warm)"}}>
       {/* Sticky navigation Header */}
       <Header
         currentTab={currentTab}
@@ -287,175 +287,218 @@ function AppInner() {
         {currentTab === "home" && (
           <div>
             {!user ? (
-              /* LANDING VIEW: Dynamic home page */
-              <div>
-                {/* Full-width Hero Carousel */}
-                <HeroCarousel />
+              /* LANDING VIEW — Premium Warm Dark Design */
+              <div style={{background:"var(--brown-900)"}}>
 
-                {/* Scrolling Feature Ticker */}
-                <TickerBand />
+                {/* === HERO SECTION === */}
+                <section className="relative min-h-[92vh] flex flex-col overflow-hidden bg-hero">
+                  {/* Ambient orbs */}
+                  <div className="orb orb-gold w-96 h-96 top-[-80px] left-[-60px] opacity-60" />
+                  <div className="orb orb-amber w-80 h-80 top-[40%] right-[-40px] opacity-40" style={{animationDelay:"-4s"}} />
+                  <div className="orb orb-gold w-64 h-64 bottom-[10%] left-[30%] opacity-30" style={{animationDelay:"-7s"}} />
 
-                {/* Hero Section */}
-                <section className="bg-[#2D1B0E] text-[#FDF8F0] py-16 px-6 relative overflow-hidden text-center md:text-left">
-                  <div className="max-w-6xl mx-auto text-center md:text-left space-y-6">
-                    <span className="inline-block bg-[#D4A853]/15 text-[#D4A853] text-xs font-bold px-3.5 py-1 rounded-full border border-[#D4A853]/30 uppercase tracking-widest">
-                      Global Publishing Ecosystem
-                    </span>
-                    <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-tight">
-                      Write. Design. Publish. <br />
-                      Like a <span className="text-shimmer">Pro</span>.
-                    </h1>
-                    <p className="text-lg sm:text-xl text-[#B8A89A] max-w-2xl leading-relaxed">
-                      AI-powered publishing for authors, educators &amp; creators. 28 premium templates, multi-format export, pitch deck generator — one lifetime payment.
-                    </p>
-                    <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                      <button
-                        onClick={() => setIsAuthOpen(true)}
-                        onMouseEnter={playVistaSound}
-                        className="px-8 py-3.5 font-bold text-sm uppercase tracking-wider text-[#2D1B0E] bg-gradient-to-r from-[#D4A853] via-[#FFE3A8] to-[#C49A42] rounded-full transition-all duration-500 hover:from-cyan-400 hover:via-blue-500 hover:to-teal-400 hover:text-white hover:scale-105 active:scale-95 shadow-md shadow-[#D4A853]/25 hover:shadow-[0_0_20px_rgba(6,182,212,0.8)] cursor-pointer animate-flash-glow"
-                        id="btn-hero-create-project"
-                      >
-                        🚀 Start Free — Create a Project
-                      </button>
-                      <a
-                        href="#learn-more"
-                        className="px-6 py-3.5 border-2 border-white/50 text-white hover:bg-white hover:text-[#2D1B0E] font-bold text-sm rounded-full transition-all cursor-pointer"
-                      >
-                        See Success Stories ↓
-                      </a>
-                    </div>
-                  </div>
-                </section>
+                  {/* Carousel */}
+                  <HeroCarousel onAction={(action) => {
+                    if (action === "auth") setIsAuthOpen(true);
+                    else handleTabChange(action);
+                  }} />
 
-                {/* Everything you need: Bento Cards */}
-                <section className="py-16 px-6 bg-[#FFFDFB]">
-                  <div className="max-w-6xl mx-auto space-y-12">
-                    <div className="text-center max-w-xl mx-auto">
-                      <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#2D1B0E]">
-                        Automated Master Publishing Platform
-                      </h2>
-                      <p className="text-xs text-[#8A7A6A] mt-1.5">
-                        Surpass Atticus, vellum, and Reedsy with robust features made for self-publishers.
-                      </p>
-                    </div>
+                  {/* Ticker */}
+                  <TickerBand />
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                      <div className="bg-white border border-[#E8E0D8] p-8 rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-[#D4A853]/50 transition-all text-center flex flex-col items-center justify-center card-hover">
-                        <span className="text-5xl block animate-pulse duration-1000 mb-2">📤</span>
-                        <h3 className="font-serif font-bold text-lg text-[#2D1B0E]">Drop Book &amp; Auto Outline</h3>
-                        <p className="text-sm text-[#8A7A6A] leading-relaxed">
-                          Drag and drop manuscripts. Instant automatic extraction of chapters, headings, and tables under 1 second.
-                        </p>
-                      </div>
-                      <div className="bg-white border border-[#E8E0D8] p-8 rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-[#D4A853]/50 transition-all text-center flex flex-col items-center justify-center card-hover">
-                        <span className="text-5xl block animate-pulse duration-1000 mb-2">🔤</span>
-                        <h3 className="font-serif font-bold text-lg text-[#2D1B0E]">28 Premium Templates</h3>
-                        <p className="text-sm text-[#8A7A6A] leading-relaxed">
-                          Beautiful styles custom-tailored for academic prints, poetry, fiction, corporate manuals, and magazines.
-                        </p>
-                      </div>
-                      <div className="bg-white border border-[#E8E0D8] p-8 rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-[#D4A853]/50 transition-all text-center flex flex-col items-center justify-center card-hover">
-                        <span className="text-5xl block animate-pulse duration-1000 mb-2">⚡</span>
-                        <h3 className="font-serif font-bold text-lg text-[#2D1B0E]">Offline-First Speed</h3>
-                        <p className="text-sm text-[#8A7A6A] leading-relaxed">
-                          In-browser immediate database saves. Work keeps fully compiling and rendering with or without internet.
-                        </p>
-                      </div>
-                      <div className="bg-white border border-[#E8E0D8] p-8 rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-[#D4A853]/50 transition-all text-center flex flex-col items-center justify-center card-hover">
-                        <span className="text-5xl block animate-pulse duration-1000 mb-2">🎓</span>
-                        <h3 className="font-serif font-bold text-lg text-[#2D1B0E]">Teecha AI Presentation</h3>
-                        <p className="text-sm text-[#8A7A6A] leading-relaxed">
-                          Outline slide synopsis scripts, curriculum planners, and virtual speaker prompts for teaching in one click.
-                        </p>
-                      </div>
-                      <div className="bg-white border border-[#E8E0D8] p-8 rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-[#D4A853]/50 transition-all text-center flex flex-col items-center justify-center card-hover">
-                        <span className="text-5xl block animate-pulse duration-1000 mb-2">🥥</span>
-                        <h3 className="font-serif font-bold text-lg text-[#2D1B0E]">Wellness Protocol Architect</h3>
-                        <p className="text-sm text-[#8A7A6A] leading-relaxed">
-                          Deploy high-end formatted layout blocks for wellness guides, recipe checksheets, and physical fitness tables.
-                        </p>
-                      </div>
-                      <div className="bg-white border border-[#E8E0D8] p-8 rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-[#D4A853]/50 transition-all text-center flex flex-col items-center justify-center card-hover">
-                        <span className="text-5xl block animate-pulse duration-1000 mb-2">🇬🇭</span>
-                        <h3 className="font-serif font-bold text-lg text-[#2D1B0E]">Heritage Dialect Guard</h3>
-                        <p className="text-sm text-[#8A7A6A] leading-relaxed">
-                          Zero-crash layout and font rendering validation for specialized Ewe, Ga, and Akan characters.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-
-                {/* What Authors & Educators Say: Testimonials Section */}
-                <section className="py-16 px-6 bg-[#FDF8F0] border-y border-[#E8E0D8]" id="learn-more">
-                  <div className="max-w-5xl mx-auto text-center md:text-left">
-                    <div className="text-center max-w-xl mx-auto mb-10">
-                      <span className="text-[10px] bg-[#D4A853]/15 text-[#D4A853] px-3.5 py-1 rounded-full font-bold uppercase tracking-widest border border-[#D4A853]/30">
-                        Testimonials &amp; Reviews
+                  {/* Hero copy */}
+                  <div className="flex-1 flex items-center justify-center px-6 py-16 relative z-10">
+                    <div className="max-w-4xl mx-auto text-center space-y-8">
+                      <span className="section-label animate-fade-up">
+                        <span>✦</span> Global Publishing Ecosystem
                       </span>
-                      <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#2D1B0E] mt-3">
-                        What Professional Authors &amp; Educators Say
+
+                      <h1 className="font-serif font-bold leading-tight animate-fade-up"
+                        style={{fontSize:"clamp(2.4rem, 7vw, 5rem)", animationDelay:"0.1s", color:"var(--text-warm)"}}>
+                        Write. Design. Publish.<br />
+                        Like a{" "}
+                        <span className="text-shimmer">Pro</span>.
+                      </h1>
+
+                      <p className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed animate-fade-up"
+                        style={{color:"var(--text-soft)", animationDelay:"0.2s"}}>
+                        AI-powered publishing for authors, educators &amp; creators worldwide.
+                        28 premium templates · Multi-format export · Pitch deck generator —
+                        <strong style={{color:"var(--gold-main)"}}> one lifetime payment.</strong>
+                      </p>
+
+                      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up" style={{animationDelay:"0.3s"}}>
+                        <button onClick={() => setIsAuthOpen(true)} onMouseEnter={playVistaSound}
+                          className="btn-gold animate-glow text-base px-8 py-4 z-10">
+                          🚀 Start Free — Create a Project
+                        </button>
+                        <a href="#features"
+                          className="btn-outline-gold text-sm px-6 py-3.5">
+                          Explore Features ↓
+                        </a>
+                      </div>
+
+                      {/* Trust strip */}
+                      <div className="flex flex-wrap items-center justify-center gap-6 pt-4 animate-fade-up" style={{animationDelay:"0.4s"}}>
+                        {["28 Premium Templates","EPUB · PDF · DOC · Markdown","Gemini AI Powered","$49 Lifetime — No Subscription","Ghana MoMo · Crypto · Card"].map(item => (
+                          <span key={item} className="flex items-center gap-1.5 text-xs" style={{color:"var(--text-muted)"}}>
+                            <span style={{color:"var(--gold-main)"}}>✓</span> {item}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {/* === FEATURES SECTION === */}
+                <section id="features" className="py-20 px-6 bg-section-alt">
+                  <div className="max-w-6xl mx-auto space-y-14">
+                    <div className="text-center space-y-4">
+                      <span className="section-label">Platform Suites</span>
+                      <h2 className="font-serif font-bold text-3xl sm:text-4xl" style={{color:"var(--text-warm)"}}>
+                        Everything You Need to Publish
                       </h2>
-                      <p className="text-xs text-[#8A7A6A] mt-1.5 leading-relaxed">
-                        Join world-class teachers, herbal healing specialists, and indie authors who switched from high-cost platforms to RitemastaPro.
+                      <p className="text-sm max-w-xl mx-auto" style={{color:"var(--text-soft)"}}>
+                        Surpass Atticus, Vellum, and Reedsy — built for African creators and global authors.
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      <div className="bg-white p-6 rounded-2xl border border-[#E8E0D8] shadow-sm hover:shadow-md transition-shadow relative flex flex-col justify-between card-hover">
-                        <div className="space-y-3">
-                          <div className="flex text-amber-500 text-sm">★★★★★</div>
-                          <p className="text-xs text-[#4A3728] leading-relaxed font-serif italic">
-                            "The Teecha AI Presentation tool is an ultimate helper! I compiled my high-school curriculum based books & study guides into standard slide synopsis scripts and teaching modules in under 60 seconds. RitemastaPro is a complete classroom ecosystem."
-                          </p>
-                        </div>
-                        <div className="border-t border-[#E8E0D8]/60 pt-3 mt-4 flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-[#D4A853]/20 flex items-center justify-center font-bold text-xs text-[#2D1B0E]">
-                            SO
-                          </div>
-                          <div>
-                            <h4 className="text-xs font-bold text-[#2D1B0E]">Prof. S. N. Okai</h4>
-                            <p className="text-[9px] text-[#8A7A6A] font-semibold uppercase">Lecturer &amp; Senior Academic Fellow</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="bg-white p-6 rounded-2xl border border-[#E8E0D8] shadow-sm hover:shadow-md transition-shadow relative flex flex-col justify-between card-hover">
-                        <div className="space-y-3">
-                          <div className="flex text-amber-500 text-sm">★★★★★</div>
-                          <p className="text-xs text-[#4A3728] leading-relaxed font-serif italic">
-                            "I wrote all my medicinal herbal handbooks on here. Formatting compound recipe checklists usually crashes standard text editor tools, but Ritemasta formats Ewe, Ga, and Akan vowels natively. Saved me thousands in prepress visual design!"
-                          </p>
-                        </div>
-                        <div className="border-t border-[#E8E0D8]/60 pt-3 mt-4 flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-[#D4A853]/20 overflow-hidden flex items-center justify-center font-bold text-xs text-[#2D1B0E]">
-                            <img src="/Founder_Robert1.jpg" alt="Robert Ashley Nikoi" className="w-full h-full object-cover" />
-                          </div>
-                          <div>
-                            <h4 className="text-xs font-bold text-[#2D1B0E]">Robert Ashley Nikoi</h4>
-                            <p className="text-[9px] text-[#8A7A6A] font-semibold uppercase">Author of The Bitter Leaf Protocols</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                      {[
+                        { icon:"📤", title:"Drop Book & Auto Outline", desc:"Drag and drop manuscripts. Instant chapter extraction under 1 second.", tab:"upload" },
+                        { icon:"🔤", title:"28 Premium Templates", desc:"Wellness, academic, fiction, poetry, magazine, business, faith & more.", tab:"layout" },
+                        { icon:"🤖", title:"iWrite Pro AI Studio", desc:"AI writing, pitch decks, contracts, proposals — Gemini-powered.", tab:"iwrite_studio" },
+                        { icon:"🎨", title:"Cover Designer", desc:"Professional ebook, academic, business card, letterhead & magazine covers.", tab:"design_studio" },
+                        { icon:"📰", title:"Magazine Builder", desc:"Full magazine layouts — A4, A5, Tabloid, Royal, B5 — PDF & HTML export.", tab:"magazine" },
+                        { icon:"⚡", title:"Offline-First Speed", desc:"In-browser saves. Works with or without internet — your work never lost.", tab:"editor" },
+                        { icon:"🎓", title:"Teecha AI Presentation", desc:"Curriculum scripts, slide synopses, and teaching modules in one click.", tab:"iwrite_studio" },
+                        { icon:"🌿", title:"Wellness Protocol Architect", desc:"Formatted layout blocks for wellness guides, recipes & fitness tables.", tab:"layout" },
+                        { icon:"🇬🇭", title:"Heritage Dialect Guard", desc:"Zero-crash rendering for Ewe, Ga, and Akan characters natively.", tab:"editor" },
+                      ].map((f) => (
+                        <div key={f.title} className="feature-card cursor-pointer" onClick={() => handleTabChange(f.tab)}>
+                          <div className="text-4xl mb-4">{f.icon}</div>
+                          <h3 className="font-serif font-bold text-base mb-2" style={{color:"var(--text-warm)"}}>{f.title}</h3>
+                          <p className="text-sm leading-relaxed" style={{color:"var(--text-muted)"}}>{f.desc}</p>
+                          <div className="mt-4 flex items-center gap-1 text-xs font-semibold" style={{color:"var(--gold-main)"}}>
+                            Open Suite <span>→</span>
                           </div>
                         </div>
-                      </div>
-
-                      <div className="bg-white p-6 rounded-2xl border border-[#E8E0D8] shadow-sm hover:shadow-md transition-shadow relative flex flex-col justify-between md:col-span-2 lg:col-span-1">
-                        <div className="space-y-3">
-                          <div className="flex text-amber-500 text-sm">★★★★★</div>
-                          <p className="text-xs text-[#4A3728] leading-relaxed font-serif italic">
-                            "Getting standard layouts usually meant paying $250 for Vellum, which doesn't support Windows or local MoMo and crypto. RitemastaPro's single GHS ₵724.50 ($49) lifetime pass unlocked beautiful exports forever. Truly stellar!"
-                          </p>
-                        </div>
-                        <div className="border-t border-[#E8E0D8]/60 pt-3 mt-4 flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-[#D4A853]/20 flex items-center justify-center font-bold text-xs text-[#2D1B0E]">
-                            SJ
-                          </div>
-                          <div>
-                            <h4 className="text-xs font-bold text-[#2D1B0E]">Sarah Jenkins</h4>
-                            <p className="text-[9px] text-[#8A7A6A] font-semibold uppercase">eBook Novelist &amp; Indie Creator</p>
-                          </div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
+                  </div>
+                </section>
+
+                {/* === PRICING SECTION === */}
+                <section className="py-20 px-6" style={{background:"var(--brown-900)"}}>
+                  <div className="max-w-5xl mx-auto space-y-14">
+                    <div className="text-center space-y-4">
+                      <span className="section-label">Simple Pricing</span>
+                      <h2 className="font-serif font-bold text-3xl sm:text-4xl" style={{color:"var(--text-warm)"}}>
+                        One Payment. Forever.
+                      </h2>
+                      <p className="text-sm" style={{color:"var(--text-soft)"}}>
+                        No subscriptions. No hidden fees. Upgrade once, publish forever.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                      {[
+                        { name:"Design Studio", price:"$29", ghs:"₵429", desc:"Cover designer · All design templates · Graphics creation", featured:false },
+                        { name:"Lifetime Pass", price:"$49", ghs:"₵724", desc:"All 28 templates · Every export format · AI tools · Future updates forever", featured:true },
+                        { name:"iWrite Pro", price:"$39", ghs:"₵576", desc:"AI book writing · Pitch decks · Contracts · Proposals", featured:false },
+                      ].map((p) => (
+                        <div key={p.name} className={`pricing-card ${p.featured ? "featured" : ""}`}>
+                          {p.featured && (
+                            <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                              <span className="bg-gradient-to-r from-[#D4A853] to-[#E8C060] text-[#1A0F06] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                                Best Value
+                              </span>
+                            </div>
+                          )}
+                          <p className="font-bold text-sm mb-3" style={{color:"var(--gold-main)"}}>{p.name}</p>
+                          <div className="flex items-end gap-2 mb-1">
+                            <span className="font-black text-4xl" style={{color:"var(--text-warm)"}}>{p.price}</span>
+                            <span className="text-sm mb-1" style={{color:"var(--text-muted)"}}>one-time</span>
+                          </div>
+                          <p className="text-xs mb-4" style={{color:"var(--text-muted)"}}>{p.ghs} GHS</p>
+                          <p className="text-xs leading-relaxed mb-6" style={{color:"var(--text-soft)"}}>{p.desc}</p>
+                          <button onClick={() => handleTabChange("export")}
+                            className={p.featured ? "btn-gold w-full" : "btn-outline-gold w-full"}>
+                            Get {p.name}
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    <p className="text-center text-xs" style={{color:"var(--text-muted)"}}>
+                      Pay via MTN MoMo · Telecel · Visa/Mastercard · BTC · SOL — powered by Paystack Ghana
+                    </p>
+                  </div>
+                </section>
+
+                {/* === TESTIMONIALS === */}
+                <section id="learn-more" className="py-20 px-6 bg-section-alt">
+                  <div className="max-w-5xl mx-auto space-y-12">
+                    <div className="text-center space-y-4">
+                      <span className="section-label">Testimonials</span>
+                      <h2 className="font-serif font-bold text-3xl sm:text-4xl" style={{color:"var(--text-warm)"}}>
+                        What Authors &amp; Educators Say
+                      </h2>
+                      <p className="text-sm" style={{color:"var(--text-soft)"}}>
+                        Join teachers, wellness writers, and indie authors who switched to RitemastaPro.
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                      {[
+                        {
+                          stars:5, initials:"SO", name:"Prof. S. N. Okai", role:"Lecturer & Senior Academic Fellow",
+                          quote:'"The Teecha AI Presentation tool is an ultimate helper! I compiled my high-school curriculum books into slide synopsis scripts and teaching modules in under 60 seconds. RitemastaPro is a complete classroom ecosystem."',
+                        },
+                        {
+                          stars:5, img:"/Founder_Robert1.jpg", name:"Robert Ashley Nikoi", role:"Author — The Bitter Leaf Protocols",
+                          quote:'"I wrote all my medicinal herbal handbooks here. Ritemasta formats Ewe, Ga, and Akan vowels natively. Saved me thousands in prepress visual design costs!"',
+                        },
+                        {
+                          stars:5, initials:"SJ", name:"Sarah Jenkins", role:"eBook Novelist & Indie Creator",
+                          quote:'"Getting standard layouts meant paying $250 for Vellum — Mac only, no MoMo. RitemastaPro\'s $49 lifetime pass unlocked beautiful exports forever. Truly stellar value!"',
+                        },
+                      ].map((t,i) => (
+                        <div key={i} className="testimonial-card flex flex-col justify-between gap-4">
+                          <div className="space-y-3">
+                            <div className="flex gap-0.5" style={{color:"var(--gold-main)"}}>{"★".repeat(t.stars)}</div>
+                            <p className="text-sm leading-relaxed font-serif italic" style={{color:"var(--text-soft)"}}>{t.quote}</p>
+                          </div>
+                          <div className="flex items-center gap-3 pt-3 border-t" style={{borderColor:"var(--border-warm)"}}>
+                            <div className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center font-bold text-xs flex-shrink-0"
+                              style={{background:"rgba(212,168,83,0.15)", color:"var(--gold-main)", border:"1px solid var(--border-warm)"}}>
+                              {t.img ? <img src={t.img} alt={t.name} className="w-full h-full object-cover" /> : t.initials}
+                            </div>
+                            <div>
+                              <p className="font-bold text-xs" style={{color:"var(--text-warm)"}}>{t.name}</p>
+                              <p className="text-[10px] uppercase tracking-wider" style={{color:"var(--text-muted)"}}>{t.role}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                {/* === FINAL CTA === */}
+                <section className="py-20 px-6 text-center relative overflow-hidden" style={{background:"var(--brown-800)"}}>
+                  <div className="orb orb-gold w-96 h-96 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20" />
+                  <div className="max-w-2xl mx-auto space-y-8 relative z-10">
+                    <h2 className="font-serif font-bold text-3xl sm:text-4xl" style={{color:"var(--text-warm)"}}>
+                      Ready to Publish Like a <span className="text-shimmer">Pro</span>?
+                    </h2>
+                    <p className="text-base" style={{color:"var(--text-soft)"}}>
+                      Join thousands of African authors and global creators. Start free today.
+                    </p>
+                    <button onClick={() => setIsAuthOpen(true)} onMouseEnter={playVistaSound}
+                      className="btn-gold animate-glow text-base px-10 py-4">
+                      Create Your Free Account →
+                    </button>
                   </div>
                 </section>
               </div>
@@ -499,14 +542,14 @@ function AppInner() {
               />
             ) : (
               <div className="py-16 text-center max-w-md mx-auto space-y-4">
-                <Settings className="w-12 h-12 text-[#D4A853] mx-auto animate-spin" />
-                <h2 className="font-serif font-bold text-lg text-[#2D1B0E]">Select a Project workspace first</h2>
-                <p className="text-xs text-[#8A7A6A]">
+                <Settings className="w-12 h-12 mx-auto animate-spin" style={{color:"var(--gold-main)"}} />
+                <h2 className="font-serif font-bold text-lg" style={{color:"var(--text-warm)"}}>Select a Project workspace first</h2>
+                <p className="text-xs" style={{color:"var(--text-muted)"}}>
                   Go to 'Home' (Dashboard) to launch or resume your wellness book, pitch deck outline, or receipts and forms.
                 </p>
                 <button
                   onClick={() => handleTabChange("home")}
-                  className="px-4 py-2 bg-[#D4A853] text-[#2D1B0E] font-bold text-xs rounded-full"
+                  className="btn-gold text-xs px-4 py-2"
                 >
                   Return to Dashboard
                 </button>
@@ -556,15 +599,15 @@ function AppInner() {
         )}
 
         {currentTab === "save" && (
-          <div className="py-12 px-6">
-            <div className="max-w-xl mx-auto bg-white border border-[#E8E0D8] p-6 sm:p-8 rounded-2xl shadow-sm text-center space-y-4">
+          <div className="py-12 px-6" style={{background:"var(--brown-800)"}}>
+            <div className="max-w-xl mx-auto p-6 sm:p-8 rounded-2xl text-center space-y-4" style={{background:"var(--brown-700)",border:"1px solid var(--border-warm)"}}>
               <span className="text-4xl block">💾</span>
-              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#2D1B0E]">Backup &amp; Manuscript Security</h2>
-              <p className="text-xs text-[#8A7A6A] leading-relaxed">
+              <h2 className="font-serif text-xl sm:text-2xl font-bold" style={{color:"var(--text-warm)"}}>Backup &amp; Manuscript Security</h2>
+              <p className="text-xs leading-relaxed" style={{color:"var(--text-muted)"}}>
                 RitemastaPro saves your work every 30 seconds automatically. For extra peace of mind, you can download a master JSON backup file below or restore from previous versions.
               </p>
               
-              <div className="bg-[#FDF8F0] p-4 rounded-xl border flex flex-col items-center gap-3">
+              <div className="p-4 rounded-xl border flex flex-col items-center gap-3" style={{background:"var(--brown-600)",borderColor:"var(--border-warm)"}}>
                 <button
                   onClick={() => {
                     if (projects.length === 0) {
@@ -581,7 +624,7 @@ function AppInner() {
                     URL.revokeObjectURL(url);
                     alert("✓ Workspace diagnostic package downloaded. Keep it safe!");
                   }}
-                  className="px-4 py-2 bg-[#D4A853] hover:bg-[#C49A42] text-[#2D1B0E] font-bold text-xs rounded-full inline-flex items-center gap-1.5 cursor-pointer shadow hover:shadow-md transition-shadow"
+                  className="btn-gold text-xs inline-flex items-center gap-1.5"
                 >
                   Download Raw JSON Backups
                 </button>
